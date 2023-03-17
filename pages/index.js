@@ -1,10 +1,9 @@
-import Feed from '@/components/Feed'
-import SideBar from '@/components/SideBar'
-import Widgets from '@/components/Widgets'
-import Head from 'next/head'
+import Feed from "@/components/Feed";
+import SideBar from "@/components/SideBar";
+import Widgets from "@/components/Widgets";
+import Head from "next/head";
 
-
-export default function Home({newsResults}) {
+export default function Home({ newsResults, randomUsersResults }) {
   return (
     <>
       <Head>
@@ -13,24 +12,30 @@ export default function Home({newsResults}) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-        <main className='flex h-screen  mx-auto '>
-          <SideBar/>
-          <Feed/>
-          <Widgets newsResults={newsResults.articles}/>
-        </main>
+      <main className="flex h-screen  mx-auto ">
+        <SideBar />
+        <Feed />
+        <Widgets
+          newsResults={newsResults.articles}
+          randomUsersResults={randomUsersResults.results}
+        />
+      </main>
     </>
-  )
+  );
 }
 
-// https://saurav.tech/NewsAPI/top-headlines/category/business/us.json
-
- export async function getServerSideProps() {
-  const newsResults = await fetch ('https://saurav.tech/NewsAPI/top-headlines/category/business/us.json')
-  .then((res)=>res.json());
+export async function getServerSideProps() {
+  const newsResults = await fetch(
+    "https://saurav.tech/NewsAPI/top-headlines/category/business/us.json"
+  ).then((res) => res.json());
+  //auto follow section
+  const randomUsersResults = await fetch(
+    "https://randomuser.me/api/?results=30&inc=name,login,picture"
+  ).then((res) => res.json());
   return {
-    props:{
+    props: {
       newsResults,
-    }
-  }
- 
+      randomUsersResults,
+    },
+  };
 }
