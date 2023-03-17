@@ -13,7 +13,7 @@ import {
 } from "@heroicons/react/outline";
 export default function SideBar() {
   return (
-    <div className=" hidden sm:flex flex-col p-2 xl:items-start fixed h-full  ">
+    <div className=" hidden sm:flex flex-col p-2 xl:items-start fixed h-full xl:ml-24 ">
       <div className="hoverEffect p-0 hover:bg-blue-100 xl:px-1">
         <Image
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Twitter-logo.svg/512px-Twitter-logo.svg.png?20220821125553"
